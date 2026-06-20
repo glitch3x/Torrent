@@ -59,8 +59,8 @@ export default function Dashboard() {
               };
             })
             .filter(doc => 
-              doc.creator === account.address || 
-              (doc.signers && doc.signers.includes(account.address))
+              doc.creator === account!.address || 
+              (doc.signers && doc.signers.includes(account!.address))
             );
             
           setMyDocuments(relevantDocs);
