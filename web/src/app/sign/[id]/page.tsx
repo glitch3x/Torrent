@@ -30,6 +30,7 @@ export default function SignDocument() {
   const [decryptedPdfUrl, setDecryptedPdfUrl] = useState<string | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "downloading" | "decrypting" | "signing" | "success" | "error">("loading");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     async function fetchDoc() {
@@ -105,7 +106,7 @@ export default function SignDocument() {
 
   const handleDownloadFinal = async () => {
     if (!documentData || !encryptionKeyStr) return;
-    setStatus("downloading");
+    setIsDownloading(true);
     try {
       const encryptedBuffer = await downloadFromWalrus(documentData.blob_id);
       const key = await importKey(encryptionKeyStr);
@@ -141,9 +142,10 @@ export default function SignDocument() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       
-      setStatus("success");
+      setIsDownloading(false);
     } catch (err: any) {
       console.error(err);
+      setIsDownloading(false);
       setStatus("error");
       setErrorMessage(err.message || "Failed to download final document.");
     }
@@ -259,10 +261,10 @@ export default function SignDocument() {
                   {encryptionKeyStr && (
                     <button 
                       onClick={handleDownloadFinal}
-                      disabled={status === "downloading"}
+                      disabled={isDownloading}
                       className="w-full py-4 bg-white border border-emerald-200 hover:bg-emerald-50 text-emerald-700 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-sm"
                     >
-                      {status === "downloading" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                      {isDownloading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
                       Download Document {documentData?.signatures?.length === documentData?.signers?.length ? "w/ Audit Trail" : ""}
                     </button>
                   )}
@@ -278,10 +280,10 @@ export default function SignDocument() {
                   {encryptionKeyStr && (
                     <button 
                       onClick={handleDownloadFinal}
-                      disabled={status === "downloading"}
+                      disabled={isDownloading}
                       className="w-full py-4 bg-white border border-emerald-200 hover:bg-emerald-50 text-emerald-700 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-sm"
                     >
-                      {status === "downloading" ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
+                      {isDownloading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Download className="w-5 h-5" />}
                       Download Document {documentData?.signatures?.length === documentData?.signers?.length ? "w/ Audit Trail" : ""}
                     </button>
                   )}
