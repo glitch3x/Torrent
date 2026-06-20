@@ -113,8 +113,12 @@ export default function Dashboard() {
         ],
       });
 
-      const result = await signAndExecuteTransaction({
+      const { digest } = await signAndExecuteTransaction({
         transaction: tx,
+      });
+
+      const result = await suiClient.waitForTransaction({
+        digest,
         options: { showEffects: true, showObjectChanges: true }
       });
       
