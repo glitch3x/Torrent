@@ -21,7 +21,7 @@ export default function Home() {
               Powered by Sui Blockchain
             </div>
 
-            <h1 className="text-6xl lg:text-[5rem] font-extrabold tracking-tighter leading-[1.05] text-slate-900">
+            <h1 className="text-5xl md:text-6xl lg:text-[5rem] font-extrabold tracking-tighter leading-[1.05] text-slate-900">
               Automate Your <br />
               Crypto Signatures. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-blue-400">
@@ -33,10 +33,10 @@ export default function Home() {
               Stop losing sensitive data to centralized clouds. Your users encrypt their documents client-side, and our smart contracts handle the immutable verification forever.
             </p>
             
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
               <Link 
                 href="/dashboard"
-                className="group relative px-8 py-4 bg-[#6366f1] text-white rounded-2xl font-bold overflow-hidden shadow-lg shadow-indigo-500/25 transition-all hover:scale-105 hover:shadow-indigo-500/40 flex items-center gap-2"
+                className="group relative px-6 py-4 sm:px-8 sm:py-4 bg-[#6366f1] text-white rounded-2xl font-bold overflow-hidden shadow-lg shadow-indigo-500/25 transition-all hover:scale-105 hover:shadow-indigo-500/40 flex items-center justify-center gap-2"
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                 <span className="relative">Start Signing</span> 
@@ -44,7 +44,7 @@ export default function Home() {
               </Link>
               <Link 
                 href="/dashboard"
-                className="px-8 py-4 text-slate-600 hover:text-slate-900 font-bold transition-colors flex items-center gap-2"
+                className="px-6 py-3 sm:px-8 sm:py-4 text-slate-600 hover:text-slate-900 font-bold transition-colors flex items-center justify-center gap-2 border sm:border-transparent border-slate-200 rounded-2xl sm:rounded-none"
               >
                 View Demo
               </Link>
