@@ -100,7 +100,8 @@ export default function SignDocument() {
     } catch (err: any) {
       console.error(err);
       setStatus("error");
-      setErrorMessage(err.message || "Failed to sign document.");
+      const msg = err?.message || (typeof err === "string" ? err : JSON.stringify(err, Object.getOwnPropertyNames(err)));
+      setErrorMessage(msg || "Failed to sign document.");
     }
   };
 
@@ -171,7 +172,11 @@ export default function SignDocument() {
             <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <AlertTriangle className="w-10 h-10 text-red-500" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Error Loading Document</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              {errorMessage === "Failed to fetch document metadata from Sui." 
+                ? "Error Loading Document" 
+                : "Action Failed"}
+            </h3>
             <p className="text-red-600 mb-6">{errorMessage}</p>
             <button 
               onClick={() => window.location.reload()}
