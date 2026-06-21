@@ -42,7 +42,7 @@ export async function uploadToWalrus(blob: Blob, epochs: number = 1): Promise<st
     }
   }
   
-  throw new Error(`All Walrus publishers failed to upload. Please try again later. Last error: ${lastError?.message || lastError}`);
+  throw new Error(`All Walrus publishers failed to upload. Please try again later. Last error: ${(lastError as any)?.message || lastError}`);
 }
 
 export async function downloadFromWalrus(blobId: string): Promise<ArrayBuffer> {
@@ -63,5 +63,5 @@ export async function downloadFromWalrus(blobId: string): Promise<ArrayBuffer> {
     }
   }
 
-  throw new Error(`All Walrus aggregators failed to download. Last error: ${lastError?.message || lastError}`);
+  throw new Error(`All Walrus aggregators failed to download. Last error: ${(lastError as any)?.message || lastError}`);
 }

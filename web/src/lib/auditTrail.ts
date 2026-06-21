@@ -106,5 +106,5 @@ export async function appendAuditTrail(
   });
 
   const modifiedPdfBytes = await pdfDoc.save();
-  return new Blob([modifiedPdfBytes], { type: "application/pdf" });
+  return new Blob([modifiedPdfBytes as any], { type: "application/pdf" });
 }

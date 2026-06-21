@@ -6,8 +6,8 @@ import { ReactNode } from "react";
 import "@mysten/dapp-kit/dist/index.css";
 
 const { networkConfig } = createNetworkConfig({
-  testnet: { url: "https://fullnode.testnet.sui.io:443" },
-  mainnet: { url: "https://fullnode.mainnet.sui.io:443" },
+  testnet: { url: "https://fullnode.testnet.sui.io:443", network: "testnet" as any },
+  mainnet: { url: "https://fullnode.mainnet.sui.io:443", network: "mainnet" as any },
 });
 const queryClient = new QueryClient();
 
